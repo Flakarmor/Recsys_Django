@@ -1,0 +1,76 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.hidden-row {
+    padding: 0 !important;
+}
+
+tr.border_bottom td {
+    border-bottom:1pt solid black;
+    border-bottom-color:rgb(221, 221, 221);
+}
+
+tr.header-row th {
+    border-bottom: none !important;
+}
+
+tr.visible-row td {
+    border-bottom: none !important;
+}
+
+tr.hidden-row td {
+    border-top: none !important;
+}
+
+.connect_lists{
+    margin-right:10px;
+    width:420px;
+}
+
+.connect_lists.result{
+    margin-right:10px;
+    height:335px;
+    width:420px;
+}
+
+.sorting-item {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.beer-info-list li a:hover, .beer-info-list li a:active  {
+				text-decoration: none;
+			    }
+
+.minimal-label {
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: transparent;
+}
+
+.danger {
+    color: #FF2626;
+}
+
+.warning {
+    color: #FF9326;
+}
+
+.good {
+    color: #007F00;
+}
+
+.table-number {
+    text-align: right;
+}
+
+.span-right {
+    float:right;
+}
+
+a.list-group-item:hover{
+    background-color:rgb(51,122,183);
+    color:#fff;
+}

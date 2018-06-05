@@ -1,0 +1,86 @@
+{% extends "survey/base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<table class="table" style="border-collapse:collapse;">
+  <tr>
+    <td><p class="navbar-brand"> Step {{printstep}} out of 5 </p></td>
+  </tr>
+  <tr>
+    <td>
+      <p style="font-size: 16px"> Below are the different group members preferences with their most favorite at the top. <br>Please put together a list of movies you feel would match the group of users as well as possible. You can do this below the users preferences.
+	<br> To get a better overview you can hover over the items below to highlight their positions in the other tables.</p>
+    </td>
+  </tr>
+</table>
+<table class="table-bordered" style="border-collapse:collapse; margin-left: 100px">
+  <tbody>
+    <tr>
+      {% for user in users %}
+      <th style="padding:5px"> User {{ user }} </th>
+      {%endfor%}
+    </tr>
+    <tr>
+      {% for prefs in userPrefs %}
+      <td>
+	<table>
+	  {% for pref in prefs %}
+	  <tr class="border_bottom">
+	    <td height="40" class="hoveritem {{pref}}" style="padding-left:3px; padding-right:3px"> {{forloop.counter}}. {{ pref }} </td>
+	  </tr>
+	  {% endfor %}
+	</table>
+      </td>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>
+<br><p style="margin-left:10px; font-size: 16px">Drag movies from the 'Available Items' box to the to the 'Recommendations' box and order them by the ten most recommended items, the top item being the most recommended item.<br>
+  Knowledge of the movies are not required and you can use the given information above for the ordering.</p>
+<tbody>
+  <table style="margin-left:10px;">
+    <td valign="top">
+      <table class="table-bordered" style="margin-right:10px;">
+	<tr>
+	  <th style="padding:5px">
+	    Available Items
+	  </th>
+	</tr>
+	<tr>
+	  <td>
+	    <!--
+		{% for item in itemlist %}
+		<td id="{{item.itemid}}" class="hoveritem {{item.item}}" style=" margin:1px; padding: 5px; display:list-item">{{ item.item }}
+		  {% endfor %}
+		  -->
+
+	    <ul id="sortable" class="connect_lists list-group" style="list-style-type:none; padding:0; padding-left:10px;">
+	      {% for item in itemlist %}
+	      <li id="{{item.itemid}}" class="list-group-item hoveritem {{item.item}}" style="display:list-item; margin:1px; padding: 5px"><a id="{{item.itemid}}" data-toggle="tooltip" data-placement="right" class="hoveritem {{item.item}}" style="text-decoration: none; display:block; color:rgb(51,51,51);"> {{item.item}} </a></li>
+	      {% endfor %}
+	    </ul>
+	  </td>
+	</tr>
+</tbody>
+</table>
+</td>
+<td valign="top">
+  <table class="table-bordered">
+    <th style="padding:5px">
+      Recommendations
+    </th>
+    <tr>
+      <td width="400">
+	<ol id="sortable-result" class= "connect_lists result"> </ol>
+      </td>
+    </tr>
+  </table>
+</td>
+<td valign="top">
+  <div>
+    <button id="next" class="btn btn-primary" onclick="location.href='{% url 'survey' %}'" style="margin-left:10px; margin-top:2px;">Step Forward <span class="glyphicon glyphicon-arrow-right"></span></button>
+  </div>
+</td>
+</table>
+
+{% endblock content %}
