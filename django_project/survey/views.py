@@ -12,9 +12,12 @@ import datetime
 # Create your views here.
 def index(request):
     context = {'nav_active': 'home'}
+    SurveyUserID = request.GET.get('user')
     groups = Surveys.objects.raw('SELECT * FROM surveys WHERE count = (SELECT count FROM surveys ORDER BY count ASC LIMIT 1) ORDER BY RAND() LIMIT 1')
     request.session['questiongroup_id'] = groups[0].surveysid
     request.session['step'] = 0
+    request.session['SurveyUserID'] = SurveyUserID
+    context.update({'SurveyUserID': SurveyUserID})
     return render(request, 'survey/index.html', context)
 
 def survey(request):
@@ -25,7 +28,7 @@ def survey(request):
     if request.method == 'POST':
         result = request.POST.getlist('resarray[]', 'False')
         step = request.session['step']
-        dbObject = Result(groupid = groupList[step], item1 = result[0], item2 = result[1], item3 = result[2], item4 = result[3], item5 = result[4], item6 = result[5], item7 = result[6], item8 = result[7], item9 = result[8], item10 = result[9])
+        dbObject = Result(groupid = groupList[step], userId = SurveyUserID, item1 = result[0], item2 = result[1], item3 = result[2], item4 = result[3], item5 = result[4], item6 = result[5], item7 = result[6], item8 = result[7], item9 = result[8], item10 = result[9])
         dbObject.save()
 
     users = Groups.objects.raw('SELECT * FROM groups WHERE groupid = %s', [groupList[step]])
@@ -64,6 +67,7 @@ def survey(request):
     context.update({'users': userList})
     context.update({'step': step})
     context.update({'printstep': step +1})
+    context.update({'SurveyUserID': SurveyUserID})
 
     return render(request, 'survey/survey.html', context)
 
