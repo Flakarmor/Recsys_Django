@@ -91,6 +91,7 @@ def survey_finish(request):
     nowFormated = ''.join(e for e in str(now) if e.isalnum())
     context = {'surveyid': questiongroup_id}
     context.update({'time': nowFormated})
+    context.update({'SurveyUserID': SurveyUserID})
     del request.session['step']
     del request.session['questiongroup_id']
 
