@@ -221,6 +221,7 @@ class Result(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     partid = models.CharField(max_length=300, blank=True, null=True)
     groupid = models.IntegerField(db_column='groupID', blank=True, null=True)  # Field name made lowercase.
+    partid = models.CharField(db_column='userId', blank=True, null=True)
     item1 = models.IntegerField(blank=True, null=True)
     item2 = models.IntegerField(blank=True, null=True)
     item3 = models.IntegerField(blank=True, null=True)
