@@ -82,7 +82,7 @@ def survey_finish(request):
 
     if request.method == 'POST':
         result = request.POST.getlist('resarray[]', 'False')
-        dbObject = Result(groupid = groupList[step], item1 = result[0], item2 = result[1], item3 = result[2], item4 = result[3], item5 = result[4], item6 = result[5], item7 = result[6], item8 = result[7], item9 = result[8], item10 = result[9])
+        dbObject = Result(groupid = groupList[step], userId = SurveyUserID, item1 = result[0], item2 = result[1], item3 = result[2], item4 = result[3], item5 = result[4], item6 = result[5], item7 = result[6], item8 = result[7], item9 = result[8], item10 = result[9])
         dbObject.save()
 
     temp = groups[0].count + 1;
