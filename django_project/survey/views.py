@@ -22,6 +22,7 @@ def index(request):
 
 def survey(request):
     questiongroup_id = request.session['questiongroup_id']
+    SurveyUserID = request.session['SurveyUserID']
     groups = Surveys.objects.raw('SELECT * FROM surveys WHERE surveysid = %s', [questiongroup_id])
     groupList = [groups[0].group1, groups[0].group2, groups[0].group3, groups[0].group4, groups[0].group5]
     step = request.session['step']
@@ -75,6 +76,8 @@ def survey_finish(request):
     if request.session['step'] < 4:
         return render(request, 'survey/index.html')
 
+
+    SurveyUserID = request.session['SurveyUserID']
     questiongroup_id = request.session['questiongroup_id']
     step = request.session['step']
     groups = Surveys.objects.raw('SELECT * FROM surveys WHERE surveysid = %s', [questiongroup_id])
